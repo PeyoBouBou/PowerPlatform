@@ -1,0 +1,1 @@
+**Power Automate** pour transférer une piece jointe d'un email sur une note d'un Compte ou d'un Contact (__only__) qui est en regarding.
