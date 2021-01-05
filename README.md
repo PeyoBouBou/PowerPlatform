@@ -1,2 +1,2 @@
-# ⛏️ Repo des différents essais autour de la Power Platform
+# ⛏️ Repo des essais autour de la Power Platform
 
