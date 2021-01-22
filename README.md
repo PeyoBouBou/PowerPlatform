@@ -1,2 +1,2 @@
-# ⛏️ Repo des essais autour de la Power Platform
+# ⛏️ Repo des essais et maquettes autour de la Power Platform :heart:
 
