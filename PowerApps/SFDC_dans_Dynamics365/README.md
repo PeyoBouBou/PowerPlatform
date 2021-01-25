@@ -51,7 +51,7 @@ The following tools were used in this project:
 Licence Power Apps "Per Apps" ou "Per User"
 
 ## :checkered_flag: Starting ##
-La [Solution](https://docs.microsoft.com/powerapps/maker/data-platform/solutions-overview) s'adapte sur un environement Dataverse standard
+La [Solution](https://docs.microsoft.com/powerapps/maker/data-platform/solutions-overview) s'adapte sur un environement Dynamics 365 Sales
 
 
 ## :memo: License ##
