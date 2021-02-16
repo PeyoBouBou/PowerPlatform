@@ -32,6 +32,8 @@
 
 Solutions du workshop Advanced PowerApps du 2 février 2021
 
+Les slides sont diponible ici  [Aka.ms/AdvancedPowerApps](https://Aka.ms/AdvancedPowerApps)
+
 ## :sparkles: Features ##
 
 :heavy_check_mark: CovidHealthCheck_1_0_0_2.zip --> Application Power Apps Model Driven avec un formulaire Portal\

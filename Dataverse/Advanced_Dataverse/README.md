@@ -1,4 +1,4 @@
-<h1 align="center">Advanced Power Automate</h1>
+<h1 align="center">Advanced Dataverse</h1>
 
 <p align="center">
   <img alt="Github issues" src="https://img.shields.io/github/issues/PeyoBouBou/mypowerplatform?color=56BEB8" />
@@ -9,11 +9,11 @@
 </p>
 
 <!-- Status -->
-<!-- 
-<h4 align="center"> 
-	🚧  Advanced Power Automate 🚀 Under construction...  🚧
-</h4> 
- -->
+
+<!-- <h4 align="center"> 
+	🚧  Advanced DAtaverse 🚀 Under construction...  🚧
+</h4>  -->
+
 <hr>
 
 <p align="center">
@@ -30,18 +30,20 @@
 
 ## :dart: About ##
 
-Solutions du workshop **Advanced Power Automate** du 9 février 2021\
+Solutions du workshop **Advanced Dataverse** du 16 février 2021
 
-Les slides sont diponible ici  [Aka.ms/AdvancedPowerAutomate](https://Aka.ms/AdvancedPowerAutomate)
+Les slides sont diponible ici  [Aka.ms/AdvancedDataverse](https://Aka.ms/AdvancedDataverse)
 
 ## :sparkles: Features ##
 
-:heavy_check_mark: CovidHealthCheck_1_0_0_3.zip --> 
+:heavy_check_mark: CovidHealthCheck_1_0_0_7.zip --> 
 - Datamodel d'une simple entité pour gérer des formulaires autour du COVID
 - Application Power Apps Model Driven avec un formulaire Portal
-- Power Automate d'exposition d'un Web Service HTTP pour enregistrer des informations dans une Table Dataverse\
+- Power Automate d'exposition d'un Web Service HTTP pour enregistrer des informations dans une Table Dataverse
+- Business Rules de gestion des champs obligatoire
+- Workflow de définition du default name du formulaire
+- Dataflow d'import CSV (.\Covid Question.csv) + Cloud FLow de gestion du Dataflow
 
-:heavy_check_mark: CloudFlowWorkshop_1_0_0_1.zip --> Exemple d'utilsiation de l'action "Dataverse List" Row dans Power Automate
 
 ## :rocket: Technologies ##
 
@@ -49,6 +51,7 @@ The following tools were used in this project:
 
 - [Power Apps](https://make.powerapps.com/)
 - [Power Automate](https://flow.microsoft.com)
+- [Dataverse](https://flow.microsoft.com)
 
 ## :white_check_mark: Requirements ##
 
