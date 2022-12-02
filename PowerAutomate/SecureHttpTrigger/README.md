@@ -18,3 +18,12 @@ Le Secret est directement stocké dans une variable d'environnement de type Stri
 La [Solution](https://docs.microsoft.com/powerapps/maker/data-platform/solutions-overview) s'adapte sur un environement Dataverse standard
 
 :warning: La **Solution** est UnManaged
+
+---
+## Tester
+Pour tester je vous conseil l'extention : YARC (Yet Another REST Client)
+
+![image](https://user-images.githubusercontent.com/6080558/205274257-81597a10-b3d1-4c40-96b2-76cf6a706e57.png)
+https://chrome.google.com/webstore/detail/yet-another-rest-client/ehafadccdcdedbhcbddihehiodgcddpl
+
+:smiley: Et je vous ajoute de fichier de test YARC dans le repos
