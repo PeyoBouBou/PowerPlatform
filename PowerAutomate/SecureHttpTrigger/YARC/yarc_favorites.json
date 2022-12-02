@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1669977844954,
+    "name": "Call HttpTrigger",
+    "url": "https://prod-225.westeurope.logic.azure.com/workflows/xxxxxxxxxxxxxxxxx/triggers/manual/paths/invoke/emailme/{SECRET}?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=xxxxxxxxxxxxxxxxxxxxxxxx",
+    "method": "POST",
+    "payload": "{\n    \"email\": \"pbo@pbo.pbo\",\n    \"name\": \"piebou\",\n    \"message\": \"Salut mon ami, \\\\nComment tu vas aujourd 'hui ?\",\n    \"sign\": \"Peyo\"\n}",
+    "headers": {},
+    "auth": {},
+    "date": 1669977844954
+  }
+]
