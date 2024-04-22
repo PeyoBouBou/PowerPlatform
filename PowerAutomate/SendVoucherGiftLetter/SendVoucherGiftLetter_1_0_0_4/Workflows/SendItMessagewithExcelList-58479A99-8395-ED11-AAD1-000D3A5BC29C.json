@@ -1,0 +1,281 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_office365": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedoffice365_5f784"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      },
+      "shared_excelonlinebusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedexcelonlinebusiness_c9a90"
+        },
+        "api": {
+          "name": "shared_excelonlinebusiness"
+        }
+      },
+      "shared_approvals": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedapprovals_76886"
+        },
+        "api": {
+          "name": "shared_approvals"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "4027dbc1-44d3-467c-ac48-f24d6fa44901"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "key-button-date": {
+                  "title": "Date",
+                  "type": "string",
+                  "x-ms-dynamically-added": false
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "fullAddress": {
+                      "title": "Adresse complète",
+                      "type": "string",
+                      "x-ms-dynamically-added": false
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "countryOrRegion": {
+                          "title": "Pays/Région",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "city": {
+                          "title": "Ville",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "state": {
+                          "title": "État",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "street": {
+                          "title": "Rue",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "postalCode": {
+                          "title": "Code postal",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        }
+                      },
+                      "required": [
+                        "countryOrRegion",
+                        "city",
+                        "state",
+                        "street",
+                        "postalCode"
+                      ]
+                    },
+                    "coordinates": {
+                      "type": "object",
+                      "properties": {
+                        "latitude": {
+                          "title": "Latitude",
+                          "type": "number",
+                          "x-ms-dynamically-added": false
+                        },
+                        "longitude": {
+                          "title": "Longitude",
+                          "type": "number",
+                          "x-ms-dynamically-added": false
+                        }
+                      },
+                      "required": [
+                        "latitude",
+                        "longitude"
+                      ]
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key-button-date",
+                "location"
+              ]
+            },
+            "headersSchema": {
+              "x-ms-user-name-encoded": {
+                "title": "Nom d'utilisateur",
+                "type": "string",
+                "format": "byte",
+                "x-ms-dynamically-added": false
+              },
+              "x-ms-user-email-encoded": {
+                "title": "E-mail de l'utilisateur",
+                "type": "string",
+                "format": "byte",
+                "x-ms-dynamically-added": false
+              },
+              "x-ms-user-timestamp": {
+                "title": "Timestamp",
+                "type": "string",
+                "x-ms-dynamically-added": false
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "Lister_les_lignes_présentes_dans_un_tableau": {
+          "runAfter": {},
+          "metadata": {
+            "01IVBHNYI6ZA3KCXO3PJE27LRI6JZSUG7A": "/PowerApps/ListeTDF/Tour de France Business Applications.xlsx",
+            "operationMetadataId": "66a00041-1061-4cd9-b4a7-097f9c70af68",
+            "tableId": "{00000000-000C-0000-FFFF-FFFF00000000}"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_excelonlinebusiness",
+              "operationId": "GetItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!ESfzX0i6U0KGMNvTkW4IpSjp0WfW6XROtuRrflnPecajij1988J3RojSwmb0guFJ",
+              "file": "01IVBHNYI6ZA3KCXO3PJE27LRI6JZSUG7A",
+              "table": "{00000000-000C-0000-FFFF-FFFF00000000}"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "CompteNpLigne": {
+          "runAfter": {
+            "Lister_les_lignes_présentes_dans_un_tableau": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5169c8f9-e231-4019-99a4-e7f25acb9220"
+          },
+          "type": "Compose",
+          "inputs": "@length(outputs('Lister_les_lignes_présentes_dans_un_tableau')?['body/value'])"
+        },
+        "Démarrer_et_attendre_une_approbation": {
+          "runAfter": {
+            "CompteNpLigne": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "afd905c0-b363-4e1e-a19b-0e66bebed734"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_approvals",
+              "operationId": "StartAndWaitForAnApproval",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_approvals"
+            },
+            "parameters": {
+              "approvalType": "Basic",
+              "WebhookApprovalCreationInput/title": "Envoyer Email à @{outputs('CompteNpLigne')} personnes",
+              "WebhookApprovalCreationInput/assignedTo": "Pierre.Bourdial@microsoft.com;",
+              "WebhookApprovalCreationInput/enableNotifications": true,
+              "WebhookApprovalCreationInput/enableReassignment": true
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Condition": {
+          "actions": {
+            "Appliquer_à_chacun": {
+              "foreach": "@outputs('Lister_les_lignes_présentes_dans_un_tableau')?['body/value']",
+              "actions": {
+                "Envoyer_un_e-mail_(V2)": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "a120c01f-44a9-4821-9e15-a171c32ec5be"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_office365",
+                      "operationId": "SendEmailV2",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                    },
+                    "parameters": {
+                      "emailMessage/To": "@items('Appliquer_à_chacun')?['Email']",
+                      "emailMessage/Subject": "Annulation de la session du Tour de France BizApp du @{items('Appliquer_à_chacun')?['Je souhaite m''inscrire à la session']}",
+                      "emailMessage/Body": "<p>Bonjour @{items('Appliquer_à_chacun')?['Prénom']},<br>\nJ'espère que vous allez bien. Je vous écris pour vous informer que nous sommes au regret d'annuler la session du Tour de France BizApp qui était prévue pour la semaine prochaine. Nous sommes désolés pour tout désagrément que cela pourrait causer.<br>\n<br>\nNous travaillons à la mise en place de nouvelles sessions de workshops qui répondront à vos attentes, et nous espérons avoir l'opportunité de vous accueillir lors d'une prochaine session.<br>\n<br>\nNous vous remercions de votre compréhension et n'hésitez pas à nous contacter si vous avez des questions ou des préoccupations.<br>\n<br>\nCordialement,<br>\nL'équipe des CSA Partenaires BizApp - <a href=\"https://aka.ms/tdf/bizapp\">https://aka.ms/tdf/bizapp</a> &nbsp;<br>\n</p>",
+                      "emailMessage/Importance": "Normal"
+                    },
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
+                  }
+                }
+              },
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "8f596da7-f74b-468d-bd54-449de01b6f9e"
+              },
+              "type": "Foreach"
+            }
+          },
+          "runAfter": {
+            "Démarrer_et_attendre_une_approbation": [
+              "Succeeded"
+            ]
+          },
+          "expression": {
+            "equals": [
+              "@outputs('Démarrer_et_attendre_une_approbation')?['body/outcome']",
+              "Approve"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b4d57e35-4eae-41be-bcb4-39da5590bb5a"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

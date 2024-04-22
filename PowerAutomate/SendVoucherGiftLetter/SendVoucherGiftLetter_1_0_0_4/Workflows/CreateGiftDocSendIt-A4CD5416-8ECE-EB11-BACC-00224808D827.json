@@ -1,0 +1,651 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_excelonlinebusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedexcelonlinebusiness_c9a90"
+        },
+        "api": {
+          "name": "shared_excelonlinebusiness"
+        }
+      },
+      "shared_wordonlinebusiness": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedwordonlinebusiness_1f8ea"
+        },
+        "api": {
+          "name": "shared_wordonlinebusiness"
+        }
+      },
+      "shared_onedriveforbusiness_1": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_SendVoucherOneDriveEnterprise"
+        },
+        "api": {
+          "name": "shared_onedriveforbusiness"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "pbo_sharedoffice365_5f784"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "4027dbc1-44d3-467c-ac48-f24d6fa44901"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "key-button-date": {
+                  "title": "Date",
+                  "type": "string",
+                  "x-ms-dynamically-added": false
+                },
+                "location": {
+                  "type": "object",
+                  "properties": {
+                    "fullAddress": {
+                      "title": "Adresse complète",
+                      "type": "string",
+                      "x-ms-dynamically-added": false
+                    },
+                    "address": {
+                      "type": "object",
+                      "properties": {
+                        "countryOrRegion": {
+                          "title": "Pays/Région",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "city": {
+                          "title": "Ville",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "state": {
+                          "title": "État",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "street": {
+                          "title": "Rue",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        },
+                        "postalCode": {
+                          "title": "Code postal",
+                          "type": "string",
+                          "x-ms-dynamically-added": false
+                        }
+                      },
+                      "required": [
+                        "countryOrRegion",
+                        "city",
+                        "state",
+                        "street",
+                        "postalCode"
+                      ]
+                    },
+                    "coordinates": {
+                      "type": "object",
+                      "properties": {
+                        "latitude": {
+                          "title": "Latitude",
+                          "type": "number",
+                          "x-ms-dynamically-added": false
+                        },
+                        "longitude": {
+                          "title": "Longitude",
+                          "type": "number",
+                          "x-ms-dynamically-added": false
+                        }
+                      },
+                      "required": [
+                        "latitude",
+                        "longitude"
+                      ]
+                    }
+                  }
+                }
+              },
+              "required": [
+                "key-button-date",
+                "location"
+              ]
+            },
+            "headersSchema": {
+              "x-ms-user-name-encoded": {
+                "title": "Nom d'utilisateur",
+                "type": "string",
+                "format": "byte",
+                "x-ms-dynamically-added": false
+              },
+              "x-ms-user-email-encoded": {
+                "title": "E-mail de l'utilisateur",
+                "type": "string",
+                "format": "byte",
+                "x-ms-dynamically-added": false
+              },
+              "x-ms-user-timestamp": {
+                "title": "Timestamp",
+                "type": "string",
+                "x-ms-dynamically-added": false
+              }
+            }
+          }
+        }
+      },
+      "actions": {
+        "Get_List_Voucher": {
+          "runAfter": {
+            "Init_-_Voucher_OK_KO": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "01IVBHNYPIBMPSEUP26RCLZ5NELTHJU2MG": "/Partenaires/_Microsoft/Certification/Gift Letter/Voucher - Isatech - Masao.xlsx",
+            "tableId": "{80BBBA1F-EB77-4704-847A-DE03B1177D5C}",
+            "01IVBHNYK32T5KTBPUIBCKTJARLD4EYBI6": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/Voucher PL-100 Academy to Send.xlsx",
+            "operationMetadataId": "506065a3-3be8-456c-ace7-dde3f1915fc2",
+            "01IVBHNYI4UDOYZUZLJZHIR6PBEBNFT3KJ": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/Voucher PL-100 Academy to Send.xlsx",
+            "01IVBHNYPWKHCKFA7XEBCLUW67YO3AXSTZ": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/Voucher PL-100 Academy to Send.xlsx",
+            "01IVBHNYLPE2HMAXGNZBGLNM4HT2GWHWU5": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/Voucher PL-100 Academy to Send.xlsx"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_excelonlinebusiness",
+              "operationId": "GetItems",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_excelonlinebusiness"
+            },
+            "parameters": {
+              "source": "me",
+              "drive": "b!ESfzX0i6U0KGMNvTkW4IpSjp0WfW6XROtuRrflnPecajij1988J3RojSwmb0guFJ",
+              "file": "01IVBHNYLPE2HMAXGNZBGLNM4HT2GWHWU5",
+              "table": "{80BBBA1F-EB77-4704-847A-DE03B1177D5C}"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "Appliquer_à_chacun": {
+          "foreach": "@outputs('Get_List_Voucher')?['body/value']",
+          "actions": {
+            "Definir_-_PartnaireName": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "04c818af-cb9c-486f-8cd4-abb8f68537ee"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "PartnaireName",
+                "value": "@items('Appliquer_à_chacun')?['Entreprise - Nom Partenaire']"
+              }
+            },
+            "Definir_-_DestiFolderName": {
+              "runAfter": {
+                "Definir_-_PartnaireName": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ada3e80f-f3af-4c8e-99b0-21d45908dbf7"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "DestiFolderName",
+                "value": "@{concat(\r\n\t'/Partenaires/_Microsoft/Certification/Gift Letter/PL100/POD/PO_'\r\n\t,variables('Date4Folder')\r\n\t,'_'\r\n\t,variables('PartnaireName')\r\n)}"
+              }
+            },
+            "Definir_-_Voucher_Ok_KO": {
+              "runAfter": {
+                "Definir_-_DestiFolderName": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "27ed6ce0-bca1-4597-8262-f6270b4448e1"
+              },
+              "type": "SetVariable",
+              "inputs": {
+                "name": "Voucher_OK_KO",
+                "value": "@int(substring(items('Appliquer_à_chacun')?['Voucher OuiNon'],0,1))"
+              }
+            },
+            "Commutateur": {
+              "runAfter": {
+                "Definir_-_Voucher_Ok_KO": [
+                  "Succeeded"
+                ]
+              },
+              "cases": {
+                "Casse": {
+                  "case": 1,
+                  "actions": {
+                    "Populate_a_Microsoft_Word_template": {
+                      "runAfter": {
+                        "Définir_-_EndDate_Voucher": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "01IVBHNYLQ45Y75GKQEZDJG4ERJ7OI4QCS": "/Partenaires/_Microsoft/Certification/Gift Letter/Entity_Gift_Letter_Template.docx",
+                        "01IVBHNYIAOFP33QAQ3BD2DPNH2C4R6DFR": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/Entity_Gift_Letter_Template.docx",
+                        "operationMetadataId": "2109703b-2212-44f7-ab22-13cc1cb1d9c8"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_wordonlinebusiness",
+                          "operationId": "CreateFileItem",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_wordonlinebusiness"
+                        },
+                        "parameters": {
+                          "source": "me",
+                          "drive": "b!ESfzX0i6U0KGMNvTkW4IpSjp0WfW6XROtuRrflnPecajij1988J3RojSwmb0guFJ",
+                          "file": "01IVBHNYIAOFP33QAQ3BD2DPNH2C4R6DFR",
+                          "dynamicFileSchema/-1813709972": "@variables('PartnaireName')",
+                          "dynamicFileSchema/-1966887698": "@variables('NowDateTxt')",
+                          "dynamicFileSchema/-905605877": "@variables('PartnaireName')",
+                          "dynamicFileSchema/-1629315663": "@variables('PartnaireName')",
+                          "dynamicFileSchema/-626307316": "@{variables('DefaultCERTIF_Code')} @{variables('DefaultCERTIF_Label')}"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    },
+                    "Save_File_-_Voucher_GiftLetter": {
+                      "runAfter": {
+                        "Populate_a_Microsoft_Word_template": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d334eda9-f12d-4711-b28d-bdefb8ea7968"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_onedriveforbusiness_1",
+                          "operationId": "CreateFile",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+                        },
+                        "parameters": {
+                          "folderPath": "@variables('DestiFolderName')",
+                          "name": "Voucher_GiftLetter_@{variables('PartnaireName')}_@{variables('DefaultCERTIF_Code')}.docx",
+                          "body": "@outputs('Populate_a_Microsoft_Word_template')?['body']"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      },
+                      "runtimeConfiguration": {
+                        "contentTransfer": {
+                          "transferMode": "Chunked"
+                        }
+                      }
+                    },
+                    "Open_File_-_How_To_PDF": {
+                      "runAfter": {
+                        "Save_File_-_Voucher_GiftLetter": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "b!ESfzX0i6U0KGMNvTkW4IpSjp0WfW6XROtuRrflnPecajij1988J3RojSwmb0guFJ.01IVBHNYPT25JCXULA7JCJDFJGLL66TTKC": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/How To - Planifier son Examen et utiliser un Voucher.pdf",
+                        "operationMetadataId": "69470f9d-2822-42aa-97ea-5903eb3fd114"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_onedriveforbusiness_1",
+                          "operationId": "GetFileContent",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+                        },
+                        "parameters": {
+                          "id": "b!ESfzX0i6U0KGMNvTkW4IpSjp0WfW6XROtuRrflnPecajij1988J3RojSwmb0guFJ.01IVBHNYPT25JCXULA7JCJDFJGLL66TTKC",
+                          "inferContentType": true
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    },
+                    "Send_Voucher_to_Partner_with_FRPETEAM": {
+                      "runAfter": {
+                        "Open_File_-_How_To_PDF": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "d080e12d-2e75-4062-87e7-fc3dfc079e7d"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_office365",
+                          "operationId": "SendEmailV2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                        },
+                        "parameters": {
+                          "emailMessage/To": "@items('Appliquer_à_chacun')?['Points - Email professionnel']",
+                          "emailMessage/Subject": "PL100 Academy : Voucher @{variables('DefaultCERTIF_Code')} pour @{items('Appliquer_à_chacun')?['Prénom']} @{items('Appliquer_à_chacun')?['Nom']} / @{variables('PartnaireName')}",
+                          "emailMessage/Body": "<p>Bonjour @{items('Appliquer_à_chacun')?['Prénom']},<br>\n<br>\nVoici votre voucher pour passer la certification @{variables('DefaultCERTIF_Code')}.<br>\n<br>\nVoucher : <strong></strong><strong>@{items('Appliquer_à_chacun')?['Voucher']}</strong><strong><br>\n</strong>Ce voucher doit être utilisé avant le <strong></strong><strong>@{variables('EndDateVoucher')}</strong><strong></strong><br>\nPour information, il est possible de programmer une date de passage jusqu’à 3 mois.<strong><br>\n</strong><br>\n<br>\nCe voucher vous est attribué de façon individuelle pour passer cet examen @{variables('DefaultCERTIF_Code')} @{variables('DefaultCERTIF_Label')}<br>\n<br>\nVous trouverez <a href=\"https://docs.microsoft.com/learn/certifications/online-exams\">ICI</a> l’ensemble des informations concernant le passage de la certification depuis votre domicile .<br>\n<br>\nBon courage pour la certification, tenez-nous au courant !<br>\n<br>\n<strong>Important !!</strong></p>\n<p>Ces vouchers sont soumis aux conditions suivantes:</p>\n<ul>\n  <li>L’acceptation du voucher implique qu’au moment de passer l’examen vous acceptiez d’être associé à votre employeur sur Partner Center Microsoft. Vous devrez également déclarer l’adresse email utilisée pour planifier l’examen (votre Microsoft Learning Email Id) sur Partner Center Microsoft. Des instructions supplémentaires à ce sujet sont disponibles dans ce blog.<br>\nVous devez utiliser le code du voucher et passer l’examen avant la date d’expiration indiquée.</li>\n  <li>Un code de voucher ne peut être utilisé qu’une seule fois pour passer un seul examen de Certification Microsoft dans un des centres de tests Pearson VUE; en personne ou bien en ligne (supervisé à distance).<br>\nLes codes de vouchers sont spécifiques à des programmes, et dans certains cas, spécifiques à des examens et ne pourront donc pas être utilisés pour d’autre offres.</li>\n  <li>Les codes de vouchers ne peuvent pas être échangés contre de l’argent, des crédits ou un remboursement.</li>\n  <li>Les codes de vouchers expirés, volés ou perdus ne seront pas remplacés.</li>\n  <li>Toute vente ou transfert d’un code de voucher est expressément interdit et constitue une fraude.</li>\n  <li>Le code du voucher sera considéré comme inutilisable s’il est modifié de quelque façon que ce soit.</li>\n  <li>Les codes de vouchers ne peuvent pas être utilisés pour des examens qui ont déjà été passés.</li>\n  <li>Microsoft, Pearson VUE et les centres de tests VUE ne peuvent être tenus pour responsable des vouchers perdus ou volés.</li>\n  <li>Pour vous inscrire à un examen, rendez-vous sur le site web Microsoft Microsoft Certifications | Microsoft Docs</li>\n  <li>Vous devrez fournir le code du voucher lors de votre inscription à un examen de Certification Microsoft.Les personnes qui, (a) ne se présentent pas à leur rendez-vous programmé pour passer un examen, ou (ii) annulent ou reprogramment leur rendez-vous pour passer un examen soixante-douze heures ou moins à partir de l’horaire initialement prévu, devront renoncer à leur code de voucher (le code ne pourra pas être réutilisé).</li>\n  <li>Les taxes, le cas échéant, relèvent de la seule responsabilité du bénéficiaire.</li>\n</ul>\n<p><strong>L'équipe PL100 Academy.</strong><br>\n<a href=\"http://go.microsoft.com/fwlink/?LinkId=521839\\\">Déclaration de confidentialité<br>\n</a><em>Microsoft France<br>\n39 Quai du Pr ésident Roosevelt<br>\nIssy-les-Moulineaux, 92130, France</em></p>",
+                          "emailMessage/Attachments": [
+                            {
+                              "Name": "Voucher_GiftLetter_@{variables('PartnaireName')}_@{variables('DefaultCERTIF_Code')}.docx",
+                              "ContentBytes": "@body('Populate_a_Microsoft_Word_template')"
+                            },
+                            {
+                              "Name": "How To - Planifier son Examen et utiliser un Voucher.pdf",
+                              "ContentBytes": "@body('Open_File_-_How_To_PDF')"
+                            }
+                          ]
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    },
+                    "Définir_-_EndDate_Voucher": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "96aafce1-29db-459b-9b40-6d172a6a9a9b"
+                      },
+                      "type": "SetVariable",
+                      "inputs": {
+                        "name": "EndDateVoucher",
+                        "value": "@{addDays('1899-12-30',int(items('Appliquer_à_chacun')?['DateExpiration']),'dd-MM-yyyy')}"
+                      }
+                    }
+                  }
+                },
+                "Casse_2": {
+                  "case": 0,
+                  "actions": {
+                    "Send_NoVoucher_to_Partner_with_FRPETEAM": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "c44d2340-5d19-429f-a131-5d5f0c3e5859"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_office365",
+                          "operationId": "SendEmailV2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                        },
+                        "parameters": {
+                          "emailMessage/To": "@items('Appliquer_à_chacun')?['Points - Email professionnel']",
+                          "emailMessage/Subject": "Participation à la PL100 Academy",
+                          "emailMessage/Body": "<p>Bonjour @{items('Appliquer_à_chacun')?['Prénom']},<br>\n<br>\nVous avez participé à la PL100 Academy et avez fait une demande de voucher pour passer la certification.<br>\nCependant, après vérification, nous avons constaté que vous n'avez pas assisté à cette ou ces session(s) :</p>\n<ul>\n  <li>1 - Dataverse : @{if(equals(items('Appliquer_à_chacun')?['1 - Dataverse'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n  <li>2 - Power Apps Model Driven : @{if(equals(items('Appliquer_à_chacun')?['2 - Power Apps Model Driven'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n  <li>3 - Power Apps Canvas : @{if(equals(items('Appliquer_à_chacun')?['3 - Power Apps Canvas'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n  <li>4 - Power Automate : @{if(equals(items('Appliquer_à_chacun')?['4 - Power Automate'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n  <li>5 - Power BI : @{if(equals(items('Appliquer_à_chacun')?['5 - Power BI'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n  <li>6 - Other et Fin : @{if(equals(items('Appliquer_à_chacun')?['6 - Other et Fin'],'Oui'),'<font color=\"green\">Oui</font>','<font color=\"red\">Non</font>')}</li>\n</ul>\n<p><br>\nNous ne pouvons malheureusement pas vous donner un voucher.<br>\n<br>\nBon courage pour la certification.<br>\n<br>\n<strong>L'équipe PL100 Academy.</strong><br>\n<a href=\"http://go.microsoft.com/fwlink/?LinkId=521839\\\">Déclaration de confidentialité</a><br>\n<em>Microsoft France<br>\n39 Quai du Président Roosevelt<br>\nIssy-les-Moulineaux, 92130, France</em></p>"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    }
+                  }
+                },
+                "Casse_3": {
+                  "case": 3,
+                  "actions": {
+                    "Send_Hors_France_to_Partner_with_FRPETEAM": {
+                      "runAfter": {},
+                      "metadata": {
+                        "operationMetadataId": "a24f82c6-495c-4bb3-bc33-fd01d7e7410e"
+                      },
+                      "type": "OpenApiConnection",
+                      "inputs": {
+                        "host": {
+                          "connectionName": "shared_office365",
+                          "operationId": "SendEmailV2",
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                        },
+                        "parameters": {
+                          "emailMessage/To": "@items('Appliquer_à_chacun')?['Points - Email professionnel']",
+                          "emailMessage/Subject": "Participation à la PL100 Academy",
+                          "emailMessage/Body": "<p>Bonjour @{items('Appliquer_à_chacun')?['Prénom']},<br>\n<br>\nVous avez participé à la PL100 Academy et avez fait une demande de voucher pour passer la certification.<br>\nCependant, après vérification, nous ne pouvons pas distribuer des vouchers Francais à des personnes hors de France : @{items('Appliquer_à_chacun')?['Entreprise - Nom Partenaire']}</p>\n<p><br>\nNous sommes vraiment désolé, mais nous ne pouvons malheureusement pas vous donner un voucher.<br>\n<br>\nBon courage pour la certification.<br>\n<br>\n<strong>L'équipe PL100 Academy.</strong><br>\n<a href=\"http://go.microsoft.com/fwlink/?LinkId=521839\\\">Déclaration de confidentialité</a><br>\n<em>Microsoft France<br>\n39 Quai du Président Roosevelt<br>\nIssy-les-Moulineaux, 92130, France</em></p>"
+                        },
+                        "authentication": {
+                          "type": "Raw",
+                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "default": {
+                "actions": {}
+              },
+              "expression": "@variables('Voucher_OK_KO')",
+              "metadata": {
+                "operationMetadataId": "8698bcbf-b010-49f9-a0de-097c4af50c1b"
+              },
+              "type": "Switch"
+            }
+          },
+          "runAfter": {
+            "Get_List_Voucher": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d4b88e3c-a063-43d9-b201-7f6e30491ff6"
+          },
+          "type": "Foreach"
+        },
+        "Init_-_NowDateTxt_(Now)": {
+          "runAfter": {
+            "Init_-_PartnaireName_(Empty)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7a2a30e5-2835-4765-bf40-191a1dd3d46c"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "NowDateTxt",
+                "type": "string",
+                "value": "@{formatDateTime(utcNow(),'dd MMMM yyyy')}"
+              }
+            ]
+          }
+        },
+        "Init_-_Date4Folder_(Now)": {
+          "runAfter": {
+            "Init_-_NowDateTxt_(Now)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1eedc468-3d30-4bb2-a0e9-c06dda057a74"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Date4Folder",
+                "type": "string",
+                "value": "@{formatDateTime(utcNow(),'yyyyMMdd')}"
+              }
+            ]
+          }
+        },
+        "Init_-_PartnaireName_(Empty)": {
+          "runAfter": {
+            "Init_-_DestiFolderPATH": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "7c7983ac-7fe8-4fd8-a7d8-3bbb16194010"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "PartnaireName",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Init_-_DestiFolderName_(empty)": {
+          "runAfter": {
+            "Init_-_Date4Folder_(Now)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "67526533-5bed-4044-9e06-02f04045b5eb"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DestiFolderName",
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "Init_-_DestiFolderPATH": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "69d5680d-e81a-49cd-b17a-1facb201f1ef"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DestiFolderPATH",
+                "type": "string",
+                "value": "/Partenaires/_Microsoft/Certification/Gift Letter/PL100/POD"
+              }
+            ]
+          }
+        },
+        "Init_-_DefaultCERTIF_Code": {
+          "runAfter": {
+            "Init_-_DestiFolderName_(empty)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "29b25f61-f051-49f9-9359-7245230ef3bb"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DefaultCERTIF_Code",
+                "type": "string",
+                "value": "PL-100"
+              }
+            ]
+          }
+        },
+        "Init_-_DefaultCERTIF_Label": {
+          "runAfter": {
+            "Init_-_DefaultCERTIF_Code": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "3bf4567c-78c0-417b-b7a2-e1201b3a78e4"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "DefaultCERTIF_Label",
+                "type": "string",
+                "value": "Microsoft Power Platform App Maker"
+              }
+            ]
+          }
+        },
+        "Init_-_EndDateVoucher": {
+          "runAfter": {
+            "Init_-_DefaultCERTIF_Label": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e43c8ef8-513c-45e9-b773-b6ac1cf6764d"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "EndDateVoucher",
+                "type": "string",
+                "value": "NoDate"
+              }
+            ]
+          }
+        },
+        "Init_-_Voucher_OK_KO": {
+          "runAfter": {
+            "Init_-_EndDateVoucher": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "42990898-826c-44f6-af59-444c79951924"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "Voucher_OK_KO",
+                "type": "integer"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}
