@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{e3a4c534-8300-ef11-9f8b-000d3a34c2ca}" Name="Daily Consolidated Tasks List" Description="Generate a daily consolidated task list - based on items in Outlook Tasks, Microsoft To Do, and Planner - and schedule time on your calendar for those tasks. Learn more at aka.ms/consolidatedtasklist. ** REQUIRED: MS Power User environment or higher. **" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/DailyConsolidatedTasksList-E3A4C534-8300-EF11-9F8B-000D3A34C2CA.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>5</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>0</StateCode>
+  <StatusCode>1</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Daily Consolidated Tasks List" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description languagecode="1033" description="Generate a daily consolidated task list - based on items in Outlook Tasks, Microsoft To Do, and Planner - and schedule time on your calendar for those tasks. Learn more at aka.ms/consolidatedtasklist. ** REQUIRED: MS Power User environment or higher. **" />
+  </Descriptions>
+</Workflow>
